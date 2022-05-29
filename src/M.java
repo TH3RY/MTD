@@ -168,22 +168,38 @@ public class M {
         Matrix tmp = new Matrix(m.composantes);
         return new M(tmp.inverse().getArray());
     }
+    public Boolean estPossible(){
+        for (int i = 0; i < getNBColonne();i++) {
+            int nb0 = 0;
+            for (int j = 0; j < getNBLigne();j++) {
+                if (composantes[i][j] == 0) nb0++;
+                if (nb0 == getNBLigne()-1 && composantes[i][getNBLigne()-1] != 0) return false;
+            }
+        }
+        return true;
+    }
 
     public static M resoudreSystemeEquation(M m) {
         double [][] compoA = new double[m.getNBColonne()][m.getNBLigne()-1];
-
-        for (int i = 0; i < compoA.length;i++)
-            System.arraycopy(m.composantes[i], 0, compoA[i], 0, compoA[i].length);
-        M A = new M(compoA);
         double [][] compoB = new double[m.getNBColonne()][1];
-        for (int i = 0; i < m.getNBColonne();i++)
-            compoB[i][0] = m.composantes[i][m.getNBColonne()];
-        M B = new M(compoB);
-        Matrix Ainv = new Matrix(A.composantes);
-        M tmp = new M(Ainv.inverse().getArray());
-
-        return multiplicationInterne(tmp,B);
+        for (int i = 0;i < m.getNBColonne();i++)
+            for (int j = 0;j < m.getNBLigne() ;j++) {
+                if (j == m.getNBLigne()-1){
+                    compoB[i][0] = m.composantes[i][j];
+                } else {
+                    compoA[i][j] = m.composantes[i][j];
+                }
+            }
+        Matrix A = new Matrix(compoA);
+        Matrix B = new Matrix(compoB);
+        return new M(A.solve(B).getArray());
     }
+    public static String theorie(){
+        return "• deux lignes qui sont identiques mais ont des termes indépendants différents\n" +
+                "• une ligne remplie de 0 avec un terme indépendant différent de 0";
+    }
+
+
     public String toString() {
         String x = "";
         for (int i = 0; i < getNBColonne();i++) {
@@ -194,7 +210,6 @@ public class M {
             }
             x = x.concat(")\n");
         }
-
         return x;
     }
 }

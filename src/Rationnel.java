@@ -6,7 +6,6 @@ public class Rationnel {
     public Rationnel(int num, int denom) {
         this.num = num;
         setDenom(denom);
-
         normalise();
     }
     public Rationnel(int num) {
@@ -16,6 +15,27 @@ public class Rationnel {
 
     public double valeurRéelle(){
         return (double) num/ (double) denom;
+    }
+
+    public static int ppcm (int x1, int x2){
+        int s = 1, t = 1;
+        for (int n = 1;; n++) {
+            s = x1 * n;
+            for (int x = 1; t < s; x++) {
+                t = x2 * x;
+            }
+            if (s == t)
+                break;
+        }
+        return s;
+    }
+
+    public static Rationnel addition(Rationnel x1, Rationnel x2){
+        int resultatDenom = Rationnel.ppcm(x1.getDenom(), x2.getDenom());
+        int resultatNom = ((resultatDenom/x1.getDenom())*x1.getNum())+((resultatDenom/x2.getDenom())*x2.getNum());
+        Rationnel resul =  new Rationnel(resultatNom, resultatDenom);
+        resul.normalise();
+        return resul;
     }
 
     private void normalise(){
