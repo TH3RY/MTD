@@ -48,7 +48,7 @@ public class Principale {
         //System.out.println(Pbis);
 
         Matrix detX = new Matrix(X.getComposantes());
-        // System.out.println(detX.det());
+        System.out.println(detX.det());
         // System.out.println(X);
         //System.out.println(M.transposee(X));
         //System.out.println(M.inverse(X));
@@ -58,6 +58,16 @@ public class Principale {
 
         M sys = new M(3, 4,1, 1, 2, -1, 5, -3, 2, 11, 3, -5, -2, 13);
         System.out.println(sys.systemeEquation());
-        System.out.println(M.resoudreSystemeEquation(sys));
+        // System.out.println(M.resoudreSystemeEquation(sys));
+        M sysdet = new M(3, 3,1, 1, 2, 5, -3, 2, 3, -5, -2);
+        Matrix tmp = new Matrix(sysdet.getComposantes());
+
+
+       // System.out.println(tmp.det());
+
+        M boule = new M(3,4,1, 2, 3, 25, 1, 1, 1, 14, 1, 0, 0, 7);
+        System.out.println(boule.systemeEquation());
+        System.out.println(M.resoudreSystemeEquation(boule));
+        //System.out.println(M.resoudreSystemeEquation(sys));
     }
 }

@@ -22,7 +22,7 @@ public class Recurrence {
         if (n == 0){
             return 1;
         } else {
-            return termeEn(n-1) +2;
+            return termeEn(n-1) + 2;
         }
     }
 

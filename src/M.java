@@ -169,8 +169,8 @@ public class M {
         Matrix tmp = new Matrix(m.composantes);
         return new M(tmp.inverse().getArray());
     }
-    public double getDet() {
-        Matrix tmp = new Matrix(this.getComposantes());
+    public static double getDet(M m) {
+        Matrix tmp = new Matrix(m.getComposantes());
         return tmp.det();
     }
     public Boolean estPossible(){
