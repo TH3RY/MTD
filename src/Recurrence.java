@@ -73,4 +73,99 @@ public class Recurrence {
         if (k < 3) return 2;
         return activ(4);
     }
+    public int getRandom(int n) {
+        // int x = "getRandom" % n + 1;
+        int x = 1;
+        if (x == 0) x = 1;
+        return x;
+    }
+    /*
+        Pn
+        P1 = 1
+        P2 = 2
+        P3 = 3
+        P4 = 5
+        P5 =
+    
+    */
+    public int dallage1(int n) {
+        if (n < 2) return 1;
+        return dallage1(n - 1) + dallage1(n - 2);
+    }
+    /*
+        p1 = 0
+        p2 = 1
+        p3 = 1
+        p4 = 1
+        p5 = 2
+        p6 = 2
+    */
+    public int dallage2(int n) {
+        if (n < 4) {
+            if (n < 2)  return 0;
+            return 1;
+        }
+        return dallage2(n - 2) + dallage2(n - 3);
+    }
+    /*
+        5m x 6(n)m
+        dalle = 2x3
+    
+    
+    */
+    public int dallage3(int n) {
+        if (n < 2) return 2;
+        return 2 * dallage3(n - 1);
+    }
+    /*
+        p1 = 2
+        p2 = 5
+        p3 = 20
+    */
+    public int dallage4(int n) {
+        if (n < 2) return 2;
+        return 3 * dallage4(n - 1) + (n % 2 == 0 ? 1 : -1);
+    }
+
+/*
+    p1 = 1
+    p2 = 3
+    p3 = 6
+    p4 = 10
+*/
+
+    public int bitstring(int n) {
+        if (n < 4) {
+            if (n == 1) return 1;
+            if (n == 2) return 3;
+            if (n == 3) return 6;
+        }
+        return (bitstring(n - 1) + bitstring(n - 2));
+    }
+
+    public void chimay(int n) {
+        if (n == 1) System.out.println("fin");
+        else {
+            int x = getRandom(n - 1);
+            System.out.println(x);
+            chimay(x);
+            System.out.println("boire");
+            chimay(n - x);
+        }
+    }
+
+    public void printBinary(int n) {
+        if (n > 0) {
+            //System.out.printf(("%d", n % 2);
+            printBinary(n / 2);
+        }
+    }
+    public Boolean estDans(int n, int d) {
+        if (n == 0) return false;
+        if (n % 10 == d) return true;
+        return estDans((int)(n / 10), d);
+    }
+    void main() {
+        System.out.println((estDans(171, 8) ? "1" : "0"));
+    }
 }
